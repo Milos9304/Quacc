@@ -1,5 +1,6 @@
 /***********************************************************************************
  * Copyright (c) 2017, UT-Battelle
+ * Copyright (c) 2021, Milos Prokop
  *
  * All rights reserved.
  *
@@ -32,7 +33,7 @@
 #include "cppmicroservices/BundleActivator.h"
 #include "cppmicroservices/BundleContext.h"
 #include "cppmicroservices/ServiceProperties.h"
-#include "mps/QuestDefaultVisitor.hpp"
+#include "QuestDefaultVisitor.hpp"
 
 using namespace cppmicroservices;
 

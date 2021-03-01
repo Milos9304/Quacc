@@ -1,5 +1,6 @@
 #***********************************************************************************
 # Copyright (c) 2019, UT-Battelle
+# Copyright (c) 2021, Milos Prokop
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,23 +28,11 @@
 
 set (LIBRARY_NAME quest-default)
 
-#if (DEFINED ENV{MKLROOT})
-#  message(STATUS "MKLROOT is set. For ITensor we force use of ATLAS BLAS")
-#  unset(ENV{MKLROOT})
-#  set(BLA_VENDOR Generic)
-#endif()
-
-find_package(BLAS REQUIRED)
-find_package(LAPACK REQUIRED)
-
-file (GLOB HEADERS mps/*.hpp)
-set (SRC mps/QuestDefaultVisitor.cpp
+file (GLOB HEADERS *.hpp)
+set (SRC QuestDefaultVisitor.cpp
 		 questDefaultActivator.cpp
 	)
          
-#set(USER_SOURCE  "mps/QuestDefaultVisitor.cpp"  CACHE STRING "Source to build with QuEST library")
-#set(OUTPUT_EXE   "demo"  CACHE STRING "Executable to compile to")
-
 usFunctionGetResourceSource(TARGET ${LIBRARY_NAME} OUT SRC)
 usFunctionGenerateBundleInit(TARGET ${LIBRARY_NAME} OUT SRC)
 
@@ -107,8 +96,8 @@ usFunctionEmbedResources(TARGET ${LIBRARY_NAME}
     manifest.json
     )
 
-target_include_directories(${LIBRARY_NAME} PUBLIC ${ITENSOR_ROOT} mps ${XACC_INCLUDE_ROOT}/eigen QuEST)
-target_link_libraries(${LIBRARY_NAME} PUBLIC xacc::xacc xacc::quantum_gate ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
+target_include_directories(${LIBRARY_NAME} PUBLIC ${XACC_INCLUDE_ROOT}/eigen QuEST)
+target_link_libraries(${LIBRARY_NAME} PUBLIC xacc::xacc xacc::quantum_gate)
 
 xacc_configure_plugin_rpath(${LIBRARY_NAME})
 

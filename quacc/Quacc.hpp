@@ -1,5 +1,6 @@
 /***********************************************************************************
  * Copyright (c) 2017, UT-Battelle
+ * Copyright (c) 2021, Milos Prokop
  *
  * All rights reserved.
  *
@@ -128,9 +129,6 @@ namespace quacc {
 			xacc::error("Invalid 'shots' parameter.");
 		  }
 
-		/*if (nbShots > 1 && backendName == "itensor-mps") {
-			xacc::warning("Multi-shot simulation is not available for 'itensor-mps' backend. This option will be ignored. \nPlease use 'exatn' backend if you want to run multi-shot simulation.");
-		  }*/
 		}
 
 		// Updated the cached configurations (to be sent on to visitor)
@@ -150,9 +148,6 @@ namespace quacc {
 	  void execute(std::shared_ptr<AcceleratorBuffer> buffer,
 				   const std::vector<std::shared_ptr<CompositeInstruction>>
 					   functions) override;
-
-	  //const double**
-	  //getAcceleratorStateInCArray(std::shared_ptr<CompositeInstruction> program) override;
 
 	  const std::string name() const override { return "quest"; }
 
@@ -187,8 +182,7 @@ namespace quacc {
 	  int __verbose = 1;
 	  bool executedOnce = false;
 	  bool vqeMode = true;
-	  // Default visitor backend is ITensor.
-	  // TODO: we may eventually use our exatn as default.
+
 	  static const std::string DEFAULT_VISITOR_BACKEND;
 	  // The backend name that is configured.
 	  // Initialized to the default.

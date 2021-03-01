@@ -1,5 +1,7 @@
 /***********************************************************************************
  * Copyright (c) 2018, UT-Battelle
+ * Copyright (c) 2021, Milos Prokop
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -66,9 +68,6 @@ namespace quacc {
 		  virtual const double
 		  getExpectationValueZ(std::shared_ptr<CompositeInstruction> function) = 0;
 
-		  virtual void setCustomState() = 0;
-
-		  //virtual void getState(double **&stateVec) {}
 		  virtual void finalize() = 0;
 		  void setOptions(const HeterogeneousMap& in_options) { options = in_options; }
 		  virtual void setKernelName(const std::string& in_kernelName) {}

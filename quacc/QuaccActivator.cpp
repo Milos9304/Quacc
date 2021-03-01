@@ -1,5 +1,7 @@
 /***********************************************************************************
  * Copyright (c) 2017, UT-Battelle
+ * Copyright (c) 2021, Milos Prokop
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,7 +48,6 @@ class US_ABI_LOCAL xQuestActivator : public BundleActivator {
 	void Start(BundleContext context) {
 		auto acc = std::make_shared<quacc::Quacc>();
 		context.RegisterService<xacc::Accelerator>(acc);
-		// context.RegisterService<xacc::OptionsProvider>(acc);
 	}
 
 	void Stop(BundleContext context) {}

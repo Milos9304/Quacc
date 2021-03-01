@@ -1,5 +1,6 @@
  /***********************************************************************************
  * Copyright (c) 2017, UT-Battelle
+ * Copyright (c) 2021, Milos Prokop
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,10 +43,6 @@ namespace quacc {
 
 class QuestDefaultVisitor : public xQuaccVisitor {
 
-  //using ITensor = itensor::ITensor;
-  //using Index = itensor::Index;
-  //using IndexVal = itensor::IndexVal;
-
 public:
   QuestDefaultVisitor();
   virtual ~QuestDefaultVisitor();
@@ -57,12 +54,8 @@ public:
   virtual const double getExpectationValueZ(std::shared_ptr<CompositeInstruction> function);
   virtual const double calcExpectationValueZ(ComplexArray in_stateVec, const std::set<size_t>& in_bits);
 
-  virtual void setCustomState();
-
   virtual void initialize(std::shared_ptr<AcceleratorBuffer> buffer) override;
   virtual void finalize() {}
-
-  //virtual void getState(double **&stateVec);
 
   // Service name as defined in manifest.json
   virtual const std::string name() const { return "quest-default"; }
@@ -73,9 +66,7 @@ public:
    * Return all relevant Quacc runtime options.
    */
   virtual OptionPairs getOptions() {
-	//OptionPairs desc{{"itensor-svd-cutoff",
-    //                    "Provide the cutoff (default 1e-4) for the singular "
-    //                    "value decomposition."}};
+
 	OptionPairs desc{{"foobar","foobar"}};
     return desc;
   }
@@ -114,43 +105,16 @@ private:
   double execTime = 0.0;
   double singleQubitTime = 1e-8;
   double twoQubitTime = 1e-7;
-  //double svdCutoff = 1e-16;
 
-  //itensor::ITensor wavefunc;
-  //std::vector<int> iqbit2iind;
   std::vector<int> cbits;
-
-  /*std::vector<ITensor> bondMats; // singular matricies
-  std::vector<ITensor> legMats;  // matricies with physical legs
-
-  std::vector<ITensor> bondMats_m; // the snapshot for measurement
-  std::vector<ITensor> legMats_m;*/
 
   std::set<size_t> measured_bits; // indecies of qbits to measure
 
-  //itensor::IndexSet legs; // physical degree of freedom
   int n_qbits;
   bool verbose = false, testing = false;
 
   void updateStateVectorInfo(Qureg &qreg, std::shared_ptr<AcceleratorBuffer> buffer); //used for testing
 
-  /*
-
-  /// init the wave function tensor
-  void initWavefunc(int n_qbits);
-  void initWavefunc_bysvd(int n_qbits);
-  void reduce_to_MPS();
-  //Index ind_for_qbit(int iqbit) const;
-  void printWavefunc() const;
-  void permute_to(int iqbit, int iqbit_to);
-  //void kickback_ind(ITensor &tensor, const Index &ind);
-  double wavefunc_inner();
-  //double average(int iqbit, const ITensor &op_tensor);
-  //itensor::ITensor tZ_measure_on(int iqbit_measured);
-  double averZs(std::set<int> iqbits);
-  void snap_wavefunc();
-
-  */
 };
 
 } // namespace quacc

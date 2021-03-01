@@ -1,5 +1,6 @@
 /***********************************************************************************
  * Copyright (c) 2017, UT-Battelle
+ * Copyright (c) 2021, Milos Prokop
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -62,10 +63,6 @@ namespace quacc {
 		visitor->initialize(buffer);
 		visitor->setKernelName(kernelDecomposed.getBase()->name());
 
-		if(buffer->hasExtraInfoKey("init_custom_state_from_ptr") &&
-				buffer->getInformation("init_custom_state_from_ptr").as<std::string>()=="true")
-			visitor->setCustomState();
-
 		// Walk the base IR tree, and visit each node
 		InstructionIterator it(kernelDecomposed.getBase());
 		while (it.hasNext()) {
@@ -110,20 +107,6 @@ namespace quacc {
 	  // Initialize the visitor
 	  visitor->initialize(buffer);
 	  visitor->setKernelName(kernel->name());
-
-	  if(buffer->hasExtraInfoKey("init_custom_state_from_ptr") &&
-				buffer->getInformation("init_custom_state_from_ptr").as<std::string>()=="true")
-	  			visitor->setCustomState();
-
-	  // If this is an Exatn-MPS visitor, transform the kernel to nearest-neighbor
-	  // Note: currently, we don't support MPS aggregated blocks (multiple qubit MPS
-	  // tensors in one block). Hence, the circuit must always be transformed into
-	  // *nearest* neighbor only (distance = 1 for two-qubit gates).
-	  if (visitor->name() == "exatn-mps" || visitor->name() == "exatn-pmps") {
-		auto opt = xacc::getService<xacc::IRTransformation>("lnn-transform");
-		opt->apply(kernel, nullptr, {std::make_pair("max-distance", 1)});
-		// std::cout << "After LNN transform: \n" << kernel->toString() << "\n";
-	  }
 
 	  // Walk the IR tree, and visit each node
 	  InstructionIterator it(kernel);

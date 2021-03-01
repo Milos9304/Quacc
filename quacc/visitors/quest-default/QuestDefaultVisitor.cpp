@@ -1,5 +1,6 @@
 /***********************************************************************************
  * Copyright (c) 2017, UT-Battelle
+ * Copyright (c) 2021, Milos Prokop
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,7 +48,7 @@ namespace quacc {
 	  } else {
 		std::stringstream s;
 		s << p.toString();
-		xacc::error("ITensorMPSVisitor: invalid gate parameter " +
+		xacc::error("QuestDefaultVisitor: invalid gate parameter " +
 					std::to_string(p.which()) + ", " + s.str());
 	  }
 
@@ -118,23 +119,6 @@ namespace quacc {
 			destroyQuESTEnv(*env);
 			initialized = false;
 		}
-
-	}
-
-	void QuestDefaultVisitor::setCustomState() {
-
-		/*std::stringstream stateVect_adress(buffer->getInformation("statevect_ptr").as<std::string>());
-	    qreal **stateVect;
-	    void* tempPointer;
-	    stateVect_adress >> tempPointer;
-	    stateVect = (qreal**) tempPointer;
-
-	    initStateFromAmps(*qreg, stateVect[0], stateVect[1]);
-
-	    std::cout<<"initted\n";
-
-	    for(size_t i=0; i < qreg->numAmpsTotal; ++i)
-	    	std::cout<<stateVect[0][i]<<" "<<stateVect[1][i]<<"\n";*/
 
 	}
 
@@ -472,15 +456,5 @@ namespace quacc {
 		}
 
 	}
-
-	/*void QuestDefaultVisitor::getState(double **&stateVec) {
-
-		double** res_stateVec = new double*[2];
-		res_stateVec[0] = qreg.stateVec.real;
-		res_stateVec[1] = qreg.stateVec.imag;
-
-		stateVec = res_stateVec;
-
-	}*/
 
 } // namespace quacc
