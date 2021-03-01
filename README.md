@@ -14,7 +14,7 @@ To use the QuEST simulator in Xacc just use
 ```
 auto qpu = xacc::getAccelerator("quest"));
 ```
-##Tests
+Tests
 -------------
 After installation run
 
