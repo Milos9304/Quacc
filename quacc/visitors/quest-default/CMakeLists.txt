@@ -1,6 +1,5 @@
 #***********************************************************************************
 # Copyright (c) 2019, UT-Battelle
-# Modified by (c) 2021, Milos Prokop
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,6 +24,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #**********************************************************************************/
+
 set (LIBRARY_NAME quest-default)
 
 #if (DEFINED ENV{MKLROOT})

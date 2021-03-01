@@ -1,6 +1,5 @@
 #***********************************************************************************
 # Copyright (c) 2019, UT-Battelle
-# Modified by (c) 2021, Milos Prokop
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,14 +26,13 @@
 #**********************************************************************************/
 
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
-project(TNQVM VERSION 1.0.0 LANGUAGES C CXX Fortran HOMEPAGE_URL "https://github.com/Milos9304/Quacc")
+project(QUACC VERSION 1.0.0 LANGUAGES C CXX Fortran HOMEPAGE_URL "https://github.com/Milos9304/Quacc")
 
 set(CMAKE_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 option(QUACC_BUILD_TESTS "Build test programs" ON)
-#option(TNQVM_BUILD_EXAMPLES "Build example programs" ON)
 
 if (NOT CMAKE_BUILD_TYPE)
   # Default build type is "Release" if not specified
@@ -71,9 +69,4 @@ add_subdirectory(quacc)
 if(QUACC_BUILD_TESTS)
 	add_subdirectory(tests)
 endif()
-
-# Build example programs if enabled
-#if(TNQVM_BUILD_EXAMPLES)
-#  add_subdirectory(examples)
-#endif()
 

@@ -26,6 +26,7 @@
  *
  * Contributors:
  *   Initial implementation - Mengsu Chen 2017.7
+ *   Modifications to include the Quacc - Milos Prokop 2021.2
  *
  **********************************************************************************/
 #ifndef QUEST_DEFAULT_VISITOR_HPP_

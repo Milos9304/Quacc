@@ -1,5 +1,6 @@
 /***********************************************************************************
  * Copyright (c) 2017, UT-Battelle
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +27,7 @@
  *
  * Contributors:
  *   Initial implementation - Mengsu Chen 2017.7
+ *   Modifications to include the Quacc - Milos Prokop 2021.2
  *
  **********************************************************************************/
 
@@ -88,12 +90,10 @@ namespace quacc {
 		  vqeMode = config.get<bool>("vqe-mode");
 		}
 
-		if (config.stringExists("tnqvm-visitor") ||
+		if (config.stringExists("quacc-visitor") ||
 			config.stringExists("backend")) {
-		  // Get the specific TNQVM visitor, either using the `tnqvm-visitor` key
+		  // Get the specific QUACC visitor, either using the `tnqvm-visitor` key
 		  // or the `backend` key.
-		  // e.g., when users use the convention "tnqvm::exatn", "exatn" will be
-		  // parsed and passed in the "backend" field.
 		  const auto requestedBackend = config.stringExists("tnqvm-visitor")
 											? config.getString("tnqvm-visitor")
 											: config.getString("backend");
@@ -198,7 +198,7 @@ namespace quacc {
 	  // then we don't return the binary measurement result (as a bit string).
 	  // This is to make sure that on the XACC side, it can interpret the avarage-Z result correctly.
 	  int nbShots = -1;
-	  // Cache of the TNQVM options (to send on to the visitor)
+	  // Cache of the QUACC options (to send on to the visitor)
 	  HeterogeneousMap options;
 
 	};

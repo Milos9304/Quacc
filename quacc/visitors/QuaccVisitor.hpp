@@ -26,6 +26,7 @@
  *
  * Contributors:
  *   Initial API and implementation - Alex McCaskey
+ *   Modifications to include the Quacc - Milos Prokop 2021.2
  *
  **********************************************************************************/
 #ifndef QUESTVISITOR_HPP_
@@ -51,7 +52,7 @@ std::string concat(Ts&&... args) {
 extern bool quacc_timing_log_enabled;
 // Macro to define a Telemetry zone whose execution time is tracked.
 // Using macros so that we can opt out if not need telemetry.
-#define TNQVM_TELEMETRY_ZONE(NAME, FILE, LINE) \
+#define QUACC_TELEMETRY_ZONE(NAME, FILE, LINE) \
   xacc::ScopeTimer __telemetry__timer(concat("quacc::", NAME, " (", FILE, ":", LINE, ")"), xacc::verbose && quacc_timing_log_enabled);
 
 namespace quacc {
