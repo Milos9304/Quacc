@@ -1,0 +1,6 @@
+{
+  "bundle.symbolic_name" : "quest-default",
+  "bundle.activator" : true,
+  "bundle.name" : "XACC Quest-default backend",
+  "bundle.description" : "This bundle provides a Quest accelerator."
+}

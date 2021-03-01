@@ -1,0 +1,5 @@
+build/*
+tests/Testing
+.cproject
+.project
+.settings

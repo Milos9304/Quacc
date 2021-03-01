@@ -1,0 +1,6 @@
+{
+  "bundle.symbolic_name" : "xacc_quest_accelerator",
+  "bundle.activator" : true,
+  "bundle.name" : "XACC QuEST Accelerator",
+  "bundle.description" : "This bundle provides a quest Accelerator for Gate Model QC."
+}
