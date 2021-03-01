@@ -1,5 +1,6 @@
 # Quacc - the Quest Accelerator for XACC
 A plugin for Xacc that implements the QuEST accelerator.
+The work is still in progress, however the current implementation should already suffice for most projects. You are welcome to contribute.
 
 Installation
 ------------
