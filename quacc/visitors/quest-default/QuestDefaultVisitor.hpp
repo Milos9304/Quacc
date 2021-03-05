@@ -55,7 +55,7 @@ public:
   virtual const double calcExpectationValueZ(ComplexArray in_stateVec, const std::set<size_t>& in_bits);
 
   virtual void initialize(std::shared_ptr<AcceleratorBuffer> buffer) override;
-  virtual void finalize() {}
+  virtual void finalize() override;
 
   // Service name as defined in manifest.json
   virtual const std::string name() const { return "quest-default"; }
@@ -101,6 +101,7 @@ private:
   Qureg qreg2;
 
   bool initialized;
+  bool global_qreg;
 
   double execTime = 0.0;
   double singleQubitTime = 1e-8;

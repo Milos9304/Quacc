@@ -76,6 +76,8 @@ namespace quacc {
 
 	  if(xacc::optionExists("use_global_qreg") && xacc::getOption("use_global_qreg") == "true"){
 
+		  global_qreg = true;
+
 		  std::stringstream qreg_adress(xacc::getOption("global_qreg"));
 		  std::stringstream env_adress(xacc::getOption("global_env"));
 		  Qureg *qregPtr;
@@ -97,6 +99,8 @@ namespace quacc {
 
 	  }else{
 
+		  global_qreg = false;
+
 		  env2 = createQuESTEnv();
 		  qreg2 = createQureg(n_qbits, env2);
 
@@ -112,15 +116,17 @@ namespace quacc {
 
 	}
 
-	QuestDefaultVisitor::~QuestDefaultVisitor() {
+	void QuestDefaultVisitor::finalize() {
 
-		if(initialized && !xacc::optionExists("use_global_qreg")){
-			destroyQureg(*qreg, *env);
-			destroyQuESTEnv(*env);
+		if(initialized && !global_qreg){
+			destroyQureg(qreg2, env2);
+			destroyQuESTEnv(env2);
 			initialized = false;
 		}
 
 	}
+
+	QuestDefaultVisitor::~QuestDefaultVisitor() {}
 
 	void QuestDefaultVisitor::updateStateVectorInfo(Qureg &qreg, std::shared_ptr<AcceleratorBuffer> buffer){
 
