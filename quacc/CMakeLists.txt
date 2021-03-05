@@ -38,10 +38,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/visitors)
 file (GLOB HEADERS *.hpp)
 file (GLOB SRC *.cpp)
 
-#add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD
-#                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-#                       "/home/milos/QuEST/QuEST/" "quacc/visitors/quest-default/QuEST")
-
 execute_process(COMMAND cp -r "${QUEST_DIR}/QuEST"
 	"${CMAKE_CURRENT_SOURCE_DIR}/visitors/quest-default/"
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}

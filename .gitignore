@@ -1,6 +1,7 @@
 build/*
 tests/Testing
 quacc/visitors/quest-default/QuEST/*
+*.swp
 .cproject
 .project
 .settings
