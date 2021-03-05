@@ -157,7 +157,28 @@ namespace quacc {
 
 	  const std::string& getVisitorName() const { return backendName; }
 
-	  virtual ~Quacc() {}
+	  ~Quacc() {
+
+		  if(xacc::optionExists("use_global_qreg") && xacc::getOption("use_global_qreg") == "true"){
+
+			  std::stringstream qreg_adress(xacc::getOption("global_qreg"));
+			  std::stringstream env_adress(xacc::getOption("global_env"));
+			  Qureg *qregPtr;
+			  QuESTEnv *envPtr;
+
+			  void *tempPointer1, *tempPointer2;
+			  qreg_adress >> tempPointer1;
+			  env_adress >> tempPointer2;
+
+			  Qureg* qreg_final = (Qureg*)tempPointer1;
+			  QuESTEnv* env_final = (QuESTEnv*)tempPointer2;
+
+			  destroyQureg(*qreg_final, *env_final);
+			  destroyQuESTEnv(*env_final);
+
+		  }
+
+	  }
 
 	  virtual HeterogeneousMap getExecutionInfo() const override {
 		auto result = visitor->getExecutionInfo();
