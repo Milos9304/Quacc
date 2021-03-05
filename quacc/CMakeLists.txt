@@ -27,21 +27,11 @@
 
 set (LIBRARY_NAME quacc)
 
-# SET YOUR QuEST DIRECTORY HERE
-if (NOT DEFINED ${QUEST_DIR})
-	set (QUEST_DIR  "/home/milos/QuEST")
-endif()
-
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/visitors)
 
 file (GLOB HEADERS *.hpp)
 file (GLOB SRC *.cpp)
-
-execute_process(COMMAND cp -r "${QUEST_DIR}/QuEST"
-	"${CMAKE_CURRENT_SOURCE_DIR}/visitors/quest-default/"
-	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-)
 
 add_subdirectory(visitors)
 
