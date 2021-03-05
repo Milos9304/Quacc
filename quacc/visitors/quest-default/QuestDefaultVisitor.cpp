@@ -100,7 +100,6 @@ namespace quacc {
 	  }else{
 
 		  global_qreg = false;
-		  std::cout << "here we init\n";
 		  env2 = createQuESTEnv();
 		  qreg2 = createQureg(n_qbits, env2);
 
@@ -122,7 +121,6 @@ namespace quacc {
 	void QuestDefaultVisitor::finalize() {
 
 		if(initialized && !global_qreg){
-			std::cout << "here we destroy\n";
 			destroyQureg(qreg2, env2);
 			destroyQuESTEnv(env2);
 			initialized = false;
