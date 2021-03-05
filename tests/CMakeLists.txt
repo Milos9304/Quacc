@@ -13,7 +13,7 @@ add_executable(gateTest gateTest.cpp)
 target_link_libraries(gateTest PRIVATE xacc::xacc xacc::quantum_gate gtest libquest)
 
 add_executable(expectationsTest expectationsTest.cpp)
-target_link_libraries(expectationsTest PRIVATE xacc::xacc xacc::quantum_gate  GTest::gtest GTest::gtest_main libquest)
+target_link_libraries(expectationsTest PRIVATE xacc::xacc xacc::quantum_gate gtest libquest)
 
 
 #target_include_directories(gateTest PRIVATE ${GTEST_INCLUDE_DIRS})
