@@ -3,6 +3,9 @@ enable_testing()
 #find_package(GTest REQUIRED)
 #include_directories(${GTEST_INCLUDE_DIRS})
 
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
 add_library(libquest SHARED IMPORTED)
 set_property(TARGET libquest PROPERTY IMPORTED_LOCATION ${CMAKE_INSTALL_PREFIX}/lib/libQuEST.so)
 
