@@ -39,7 +39,7 @@
 #include "xacc_service.hpp"
 #include <cassert>
 
-#include "../quacc/visitors/quest-default/QuEST/include/QuEST.h"
+#include "QuEST.h"
 #include "visitors/QuaccVisitor.hpp"
 
 namespace quacc {
