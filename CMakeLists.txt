@@ -75,6 +75,9 @@ endif()
 add_subdirectory(quacc)
 
 if(QUACC_BUILD_TESTS)
+	find_package(GTest REQUIRED)
+	include_directories(${GTEST_INCLUDE_DIRS})
+
 	add_subdirectory(tests)
 endif()
 
