@@ -119,8 +119,6 @@ namespace quacc {
 			initialized = false;
 		}
 
-		destroyQuESTEnv(*env);
-
 	}
 
 	QuestDefaultVisitor::~QuestDefaultVisitor() {}
