@@ -116,10 +116,10 @@ namespace quacc {
 
 		if(initialized && !global_qreg){
 			destroyQureg(qreg2, *env);
-			destroyQuESTEnv(*env);
 			initialized = false;
-
 		}
+
+		destroyQuESTEnv(*env);
 
 	}
 
