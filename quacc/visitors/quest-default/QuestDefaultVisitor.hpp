@@ -96,8 +96,6 @@ private:
 
   QuESTEnv *env;
   Qureg *qreg;
-
-  QuESTEnv env2;
   Qureg qreg2;
 
   bool initialized;
