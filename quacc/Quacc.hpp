@@ -165,7 +165,6 @@ namespace quacc {
 		  if(xacc::optionExists("use_global_qreg") && xacc::getOption("use_global_qreg") == "true"){
 
 			  std::stringstream qreg_adress(xacc::getOption("global_qreg"));
-			  Qureg *qregPtr;
 
 			  void *tempPointer1;
 			  qreg_adress >> tempPointer1;
