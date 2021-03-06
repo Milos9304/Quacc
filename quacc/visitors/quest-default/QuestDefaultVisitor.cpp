@@ -74,21 +74,20 @@ namespace quacc {
 	  cbits.resize(n_qbits);
 	  execTime = 0.0;
 
+	  void *tempPointer;
+	  std::stringstream env_adress(xacc::getOption("global_env"));
+	  env_adress >> tempPointer;
+	  env = (QuESTEnv*)tempPointer;
+
 	  if(xacc::optionExists("use_global_qreg") && xacc::getOption("use_global_qreg") == "true"){
 
 		  global_qreg = true;
 
 		  std::stringstream qreg_adress(xacc::getOption("global_qreg"));
-		  std::stringstream env_adress(xacc::getOption("global_env"));
 		  Qureg *qregPtr;
-		  QuESTEnv *envPtr;
 
-		  void *tempPointer1, *tempPointer2;
-		  qreg_adress >> tempPointer1;
-		  env_adress >> tempPointer2;
-
-		  qreg = (Qureg*)tempPointer1;
-		  env = (QuESTEnv*)tempPointer2;
+		  qreg_adress >> tempPointer;
+		  qreg = (Qureg*)tempPointer;
 
 		  //perform measurement on qreg2, *qreg still holds the initial statevector
 		  if(buffer->hasExtraInfoKey("repeated_measurement_mode") &&
@@ -100,13 +99,8 @@ namespace quacc {
 	  }else{
 
 		  global_qreg = false;
-		  env2 = createQuESTEnv();
-		  qreg2 = createQureg(n_qbits, env2);
-
-		  env = &env2;
+		  qreg2 = createQureg(n_qbits, *env);
 		  qreg = &qreg2;
-
-
 
 	  }
 
@@ -121,8 +115,8 @@ namespace quacc {
 	void QuestDefaultVisitor::finalize() {
 
 		if(initialized && !global_qreg){
-			destroyQureg(qreg2, env2);
-			destroyQuESTEnv(env2);
+			destroyQureg(qreg2, *env);
+			destroyQuESTEnv(*env);
 			initialized = false;
 
 		}

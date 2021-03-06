@@ -47,39 +47,42 @@ namespace quacc {
 	class Quacc : public Accelerator {
 	public:
 
-	  void initialize(const xacc::HeterogeneousMap &params = {}) override {
+	void initialize(const xacc::HeterogeneousMap &params = {}) override{
+
 		if (xacc::optionExists("quacc-verbose")) {
 		  __verbose = 1;
 		} else {
 		  __verbose = 0;
 		}
 
+		const QuESTEnv* env_address = static_cast<const QuESTEnv*>(&env);
+	    std::stringstream ss_env_ptr;
+	    ss_env_ptr << env_address;
+
+	    xacc::setOption("use_global_env", "true");
+	    xacc::setOption("global_env", ss_env_ptr.str());
+
 		// Clear the cached configs on XaccQuest initialize.
 		options.clear();
 		// Force a configuration update,
 		// which will update the cache appropriately.
 		updateConfiguration(params);
-	  }
+
+	}
 
 	  // This is called post-initialize to add/update configurations.
 	  void updateConfiguration(const HeterogeneousMap &config) override {
 
 		if (config.keyExists<int>("nbQbits")){
 
-		  env = createQuESTEnv();
 		  qreg = createQureg(config.get<int>("nbQbits"), env);
 
-		  const QuESTEnv* env_address = static_cast<const QuESTEnv*>(&env);
 		  const Qureg* qreg_address = static_cast<const Qureg*>(&qreg);
 
-		  std::stringstream ss_env_ptr;
 		  std::stringstream ss_qreg_ptr;
-
-		  ss_env_ptr << env_address;
 		  ss_qreg_ptr << qreg_address;
 
 		  xacc::setOption("use_global_qreg", "true");
-		  xacc::setOption("global_env", ss_env_ptr.str());
 		  xacc::setOption("global_qreg", ss_qreg_ptr.str());
 
 		}
@@ -162,21 +165,18 @@ namespace quacc {
 		  if(xacc::optionExists("use_global_qreg") && xacc::getOption("use_global_qreg") == "true"){
 
 			  std::stringstream qreg_adress(xacc::getOption("global_qreg"));
-			  std::stringstream env_adress(xacc::getOption("global_env"));
 			  Qureg *qregPtr;
-			  QuESTEnv *envPtr;
 
-			  void *tempPointer1, *tempPointer2;
+			  void *tempPointer1;
 			  qreg_adress >> tempPointer1;
-			  env_adress >> tempPointer2;
 
 			  Qureg* qreg_final = (Qureg*)tempPointer1;
-			  QuESTEnv* env_final = (QuESTEnv*)tempPointer2;
 
-			  destroyQureg(*qreg_final, *env_final);
-			  destroyQuESTEnv(*env_final);
+			  destroyQureg(*qreg_final, env);
 
 		  }
+
+		  destroyQuESTEnv(env);
 
 	  }
 
@@ -197,7 +197,8 @@ namespace quacc {
 
 	private:
 
-	  QuESTEnv env;
+	  const QuESTEnv env = createQuESTEnv();
+
 	  Qureg qreg;
 
 	  int __verbose = 1;
